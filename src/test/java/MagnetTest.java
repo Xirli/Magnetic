@@ -19,8 +19,8 @@ public class MagnetTest {
 
         Particle particle = new Particle(new PVector(0,0, 0), 1 ,2);
 
-        assertEquals(monopole.particle.length, 1);
-        assertEqualsParticle(monopole.particle[0], particle);
+        assertEquals(monopole.getParticle().length, 1);
+        assertEqualsParticle(monopole.getParticle()[0], particle);
     }
 
     @org.junit.jupiter.api.Test
@@ -32,9 +32,9 @@ public class MagnetTest {
                 new Particle(new PVector(-3,0, 0), -1 ,2),
         };
 
-        assertEquals(dipole.particle.length, 2);
+        assertEquals(dipole.getParticle().length, 2);
         for(int i = 0; i < 2; i++) {
-            assertEqualsParticle(dipole.particle[i], particle[i]);
+            assertEqualsParticle(dipole.getParticle()[i], particle[i]);
         }
     }
 
@@ -49,9 +49,9 @@ public class MagnetTest {
                 new Particle(new PVector(0,-3, 0), -1 ,2),
         };
 
-        assertEquals(multipole.particle.length, 4);
+        assertEquals(multipole.getParticle().length, 4);
         for(int i = 0; i < 4; i++) {
-            assertEqualsParticle(multipole.particle[i], particle[i]);
+            assertEqualsParticle(multipole.getParticle()[i], particle[i]);
         }
     }
 }

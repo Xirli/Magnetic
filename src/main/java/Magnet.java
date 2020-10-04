@@ -5,30 +5,34 @@ public class Magnet {
 
     private static final PApplet SKETCH = Main.SKETCH;
 
-    PVector coord;
-    PVector speed;
+    private final PVector coord;
+    private final PVector speed;
 
-    float angle;
-    float velocity;
+    private final PVector angle;
+    private final PVector velocity;
 
-    Particle[] particle;
-    float mass;
-    float momentOfInertia;
+    private final Particle[] particle;
+    private float mass;
+    private float momentOfInertia;
 
     public Magnet(Particle[] particle){
         this.particle = particle;
-
+        
         coord = new PVector(0,0,0);
         speed = new PVector(0,0,0);
+        angle = new PVector(0,0,0);
+        velocity = new PVector(0,0,0);
+
+        PVector coordOfCenter = new PVector(0,0,0);
 
         for(Particle part : particle){
             mass += part.mass;
-            coord.add(PVector.mult(part.coord, part.mass));
+            coordOfCenter.add(PVector.mult(part.coord, part.mass));
         }
-        coord.div(mass);
+        coordOfCenter.div(mass);
 
         for(Particle part : particle){
-            part.coord.sub(coord);
+            part.coord.sub(coordOfCenter);
             momentOfInertia += part.mass * part.coord.magSq();
         }
     }
@@ -55,4 +59,20 @@ public class Magnet {
         return new Magnet(particle);
     }
 
+    public void initCoord(float x, float y, float z){
+        coord.set(x, y, z);
+    }
+    public void initSpeed(float x, float y, float z){
+        speed.set(x, y, z);
+    }
+    public void initAngle(float x, float y, float z){
+        angle.set(x, y, z);
+    }
+    public void initVelocity(float x, float y, float z){
+        velocity.set(x, y, z);
+    }
+
+    public Particle[] getParticle(){
+        return particle;
+    }
 }
