@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Magnetic:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Magnetic_jar</output-path>
+    <root id="archive" name="Magnetic.jar">
+      <element id="module-output" name="Magnetic" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/processing/core/3.3.7/core-3.3.7.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+    </root>
+  </artifact>
+</component>

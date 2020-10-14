@@ -2,11 +2,11 @@ import processing.core.PVector;
 
 public class Particle {
 
-    public PVector coord;
-    public PVector absoluteCoord;
+    public final PVector coord;
+    public final PVector absoluteCoord;
 
-    public float charge;
-    public float mass;
+    public final float charge;
+    public final float mass;
 
     public Particle(PVector coord, float charge, float mass){
         this.coord = coord;

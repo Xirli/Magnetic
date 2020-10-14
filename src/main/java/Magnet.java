@@ -5,22 +5,20 @@ import java.util.Arrays;
 
 public class Magnet {
 
-    public static final float KULON = (float) 10;
+    public static final float KULON = (float) 3;
     public static final float minRadiusOfParticle = 10;
     public static final float drawRadiusOfParticle = 1000;
-    //public static final float cameraZ = -100;
+    public static final float rotationSlowdown = (float) 0.999;
 
-    private static final PApplet SKETCH = Main.SKETCH;
+    protected final PVector coord;
+    protected final PVector speed;
 
-    private final PVector coord;
-    private final PVector speed;
+    protected final PVector angle;
+    protected final PVector velocity;
 
-    private final PVector angle;
-    private final PVector velocity;
-
-    private final Particle[] particle;
-    private float mass;
-    private float momentOfInertia;
+    protected final Particle[] particle;
+    protected float mass;
+    protected float momentOfInertia;
 
     public Magnet(Particle[] particle){
         this.particle = particle;
@@ -44,28 +42,6 @@ public class Magnet {
         }
     }
 
-    public static Magnet newMonopole(float charge, float particleMass){
-        return newMultipole(1, 0, charge, particleMass);
-    }
-
-    public static Magnet newDipole(float radius, float charge, float particleMass){
-        return newMultipole(2, radius, charge, particleMass);
-    }
-
-    public static Magnet newMultipole(int countOfPole, float radius, float charge, float particleMass){
-        Particle[] particle = new Particle[countOfPole];
-
-        for(int i = 0; i < countOfPole; i++){
-            particle[i] = new Particle(
-                    PVector.fromAngle((float) (2*Math.PI * i/countOfPole)).mult(radius),
-                    -(charge *=-1),
-                    particleMass
-            );
-        }
-
-        return new Magnet(particle);
-    }
-
     public void setCoord(PVector set){
         for(Particle part : particle){
             part.absoluteCoord.add(PVector.mult(coord,-1));
@@ -86,22 +62,36 @@ public class Magnet {
 
     public void setAngle(PVector set){
         angle.set(set);
-
-        angle.x %= PApplet.TWO_PI;
-        angle.y %= PApplet.TWO_PI;
-        angle.z %= PApplet.TWO_PI;
+        set.normalize();
+        float fi = angle.mag();
 
         for(Particle part : particle){
-            part.absoluteCoord.y = part.coord.y * PApplet.cos(angle.x) - part.coord.z * PApplet.sin(angle.x) + this.coord.y;
-            part.absoluteCoord.z = part.coord.y * PApplet.sin(angle.x) + part.coord.z * PApplet.cos(angle.x) + this.coord.z;
+            float x = part.coord.x;
+            float y = part.coord.y;
+            float z = part.coord.z;
 
-            part.absoluteCoord.z = part.coord.z * PApplet.cos(angle.y) - part.coord.x * PApplet.sin(angle.y) + this.coord.z;
-            part.absoluteCoord.x = part.coord.z * PApplet.sin(angle.y) + part.coord.x * PApplet.cos(angle.y) + this.coord.x;
+            PVector newCoord = new PVector(part.coord.x, part.coord.y, part.coord.z);
 
-            part.absoluteCoord.x = part.coord.x * PApplet.cos(angle.z) - part.coord.y * PApplet.sin(angle.z) + this.coord.x;
-            part.absoluteCoord.y = part.coord.x * PApplet.sin(angle.z) + part.coord.y * PApplet.cos(angle.z) + this.coord.y;
+            newCoord.x = x * matrices0(fi, set.x)               + y * matrices2(fi, set.x, set.y, set.z) + z * matrices1(fi, set.x, set.z, set.y);
+            newCoord.y = x * matrices1(fi, set.y, set.x, set.z) + y * matrices0(fi, set.y)               + z * matrices2(fi, set.y, set.z, set.x);
+            newCoord.z = x * matrices2(fi, set.z, set.x, set.y) + y * matrices1(fi, set.z, set.y, set.x) + z * matrices0(fi, set.z);
+
+            newCoord.add(coord);
+
+            part.absoluteCoord.set(newCoord);
         }
     }
+    private float matrices0(float angle, float a){
+        return PApplet.cos(angle) + (1 - PApplet.cos(angle))*a*a ;
+    }
+    private float matrices1(float angle, float a, float b, float c){
+        return (1 - PApplet.cos(angle))*a*b + PApplet.sin(angle)*c  ;
+    }
+    private float matrices2(float angle, float a, float b, float c){
+        return (1 - PApplet.cos(angle))*a*b - PApplet.sin(angle)*c  ;
+    }
+
+
     public void setAngle(float x, float y, float z) {
         setAngle(new PVector(x,y,z));
     }
@@ -120,6 +110,23 @@ public class Magnet {
     public void display(){
         setCoord(PVector.add(coord, speed));
         setAngle(PVector.add(angle, velocity));
+        angle.mult(rotationSlowdown);
+    }
+
+    public void draw(){
+        for(Particle part : particle){
+
+            if(part.absoluteCoord.z < 1) continue;
+
+            if(part.charge > 0) Main.SKETCH.fill(255,0,0);
+            else Main.SKETCH.fill(0,0,255);
+            Main.SKETCH.ellipse(
+                    100*part.absoluteCoord.x/(part.absoluteCoord.z),
+                    100*part.absoluteCoord.y/(part.absoluteCoord.z),
+                    drawRadiusOfParticle/(part.absoluteCoord.z),
+                    drawRadiusOfParticle/(part.absoluteCoord.z)
+            );
+        }
     }
 
     public static void gravity(Magnet mag1, Magnet mag2){
@@ -150,22 +157,6 @@ public class Magnet {
         vector.normalize();
         vector.mult(F);
         return vector;
-    }
-
-    public void draw(){
-        for(Particle part : particle){
-
-            if(part.absoluteCoord.z < 1) continue;
-
-            if(part.charge > 0) SKETCH.fill(255,0,0);
-            else SKETCH.fill(0,0,255);
-            SKETCH.ellipse(
-                    part.absoluteCoord.x,
-                    part.absoluteCoord.y,
-                    drawRadiusOfParticle/(part.absoluteCoord.z) ,
-                    drawRadiusOfParticle/(part.absoluteCoord.z)
-            );
-        }
     }
 
     @Override
