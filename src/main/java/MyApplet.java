@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class MyApplet extends PApplet{
 
-    ArrayList<Magnet> magnets = MagnetGenerator.generateDipole();
+    //ArrayList<Magnet> magnets = MagnetGenerator.generateMonopole(20);
+    ArrayList<Magnet> magnets = MagnetGenerator.generateParaMagnetic();
+
     public void settings(){
-        size(800, 800);
+        size(1000, 800);
     }
 
     public void draw(){

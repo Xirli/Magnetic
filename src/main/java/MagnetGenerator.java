@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MagnetGenerator {
 
-    public static final float sceneZ = 150;
+    public static final float sceneZ = 100;
 
     public static Particle[] monopole(float charge, float particleMass){
         return multipole(1, 0, charge, particleMass);
@@ -38,7 +38,33 @@ public class MagnetGenerator {
     public static Magnet MagnetMouseCoord(Particle[] part){
         return new Magnet(part){
             public void display(){
-                setCoord(Main.SKETCH.mouseX, Main.SKETCH.mouseY, sceneZ);
+                setCoord(Main.SKETCH.mouseX-Main.SKETCH.width/2 , Main.SKETCH.mouseY-Main.SKETCH.height/2, sceneZ);
+                setSpeed(0,0,0);
+            }
+            public void draw(){
+                for(Particle part : particle){
+
+                    if(part.absoluteCoord.z < 1) continue;
+
+                    if(part.charge > 0) Main.SKETCH.fill(255,0,0);
+                    else Main.SKETCH.fill(0,0,255);
+
+                    Main.SKETCH.ellipse(
+                            (100*part.absoluteCoord.x)/(part.absoluteCoord.z),
+                            (100*part.absoluteCoord.y)/(part.absoluteCoord.z),
+                            drawRadiusOfParticle/(part.absoluteCoord.z),
+                            drawRadiusOfParticle/(part.absoluteCoord.z)
+                    );
+                    Main.SKETCH.stroke(255);
+                    Main.SKETCH.strokeWeight(5);
+                    Main.SKETCH.line(
+                            (100*part.absoluteCoord.x)/(part.absoluteCoord.z),
+                            (100*part.absoluteCoord.y)/(part.absoluteCoord.z),
+                            (100*part.absoluteCoord.x+ speed.x*1000000)/(part.absoluteCoord.z),
+                            (100*part.absoluteCoord.y+ speed.y*1000000)/(part.absoluteCoord.z)
+                    );
+                    Main.SKETCH.strokeWeight(0);
+                }
             }
         };
     }
@@ -48,7 +74,7 @@ public class MagnetGenerator {
         float charge = 1;
         for(int i = 0; i < count; i++) {
             Magnet m = new Magnet( monopole( charge*=-1, 1) );
-            m.setCoord(PVector.random3D().mult(200).add(0,0,sceneZ));
+            m.setCoord(PVector.random2D().mult(200).add(0,0,sceneZ));
             m.setVelocity(0, (float) 0, (float) 0.0);
             magnets.add(m);
         }
@@ -63,7 +89,7 @@ public class MagnetGenerator {
         ArrayList<Magnet> magnets = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
             Magnet m = new Magnet(dipole(radius, 1, 1));
-            m.setCoord(PVector.random3D().mult(100).add(0,0,sceneZ));
+            m.setCoord(PVector.random2D().mult(100).add(0,0,sceneZ));
             m.setVelocity(0, 0,  0);
             magnets.add(m);
         }
@@ -78,7 +104,7 @@ public class MagnetGenerator {
 
         ArrayList<Magnet> magnets = new ArrayList<>();
 
-        Magnet m = MagnetMouseCoord(monopole( 1, 1));
+        Magnet m = MagnetMouseCoord(monopole(4,2));
         m.setCoord(-50,-50,sceneZ);
         m.setVelocity(0, 0,  0);
         magnets.add(m);
@@ -86,11 +112,11 @@ public class MagnetGenerator {
         for(int i = -width/2; i < (width+1)/2; i++) {
             for(int j = -height/2; j < (height+1)/2; j++) {
 
-                m = MagnetConstCoord(dipole(10, 5, 5));
+                m = MagnetConstCoord(dipole(7, 5, 5));
 
                 m.setCoord(i * dist,j * dist, sceneZ);
                 m.setVelocity(0,  0,  0);
-                //m.setAngle(0,0, (float) Math.random());
+                //m.setAngle(0,0, (float) Math.random());//
                 magnets.add(m);
             }
         }
