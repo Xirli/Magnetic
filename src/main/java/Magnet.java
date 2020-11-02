@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class Magnet {
 
-    public static final float KULON = (float) 4;
-    public static final float minRadiusOfParticle = 10;
+    public static final float KULON = (float) 5;
+    public static final float minRadiusOfParticle = 5;
     public static final float drawRadiusOfParticle = 1000;
     public static final float rotationSlowdown = (float) 0.999;
 

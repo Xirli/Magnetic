@@ -5,16 +5,19 @@ import java.util.ArrayList;
 
 public class MyApplet extends PApplet{
 
-    //ArrayList<Magnet> magnets = MagnetGenerator.generateMonopole(20);
-    ArrayList<Magnet> magnets = MagnetGenerator.generateParaMagnetic();
+    ArrayList<Magnet> magnets;
 
     public void settings(){
-        size(1000, 800);
+        size(1000, 700);
+        MagnetGenerator.sceneX = 500;
+        MagnetGenerator.sceneY = 350;
+        magnets = MagnetGenerator.generateParaMagnetic();
+        //magnets = MagnetGenerator.generateMonopole(50);
     }
 
     public void draw(){
         background(0);
-        translate((float) width/2, (float) height/2);
+        //translate((float) width/2, (float) height/2);
         for(Magnet mag : magnets) {
             mag.draw();
             mag.display();
@@ -26,11 +29,11 @@ public class MyApplet extends PApplet{
             }
         }
 
-        translate((float) -width/2, (float) -height/2);
+        //translate((float) -width/2, (float) -height/2);
     }
 
     public void mouseDragged(){
-        magnets.get(0).setCoord(mouseX-(float)width/2, mouseY-(float)height/2, 100);
+
     }
 
 }
