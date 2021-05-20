@@ -4,16 +4,18 @@ import java.util.ArrayList;
 
 public class Analizator {
 
+    public static float SIZE = 10;
+
     public static void potential(ArrayList<Magnet> magnets){
-        float size = 50;
-        for(int x = 0; x < Main.SKETCH.width; x += size){
-            for(int y = 0; y < Main.SKETCH.height; y += size){
+
+        for(int x = 0; x < Main.SKETCH.width; x += SIZE){
+            for(int y = 0; y < Main.SKETCH.height; y += SIZE){
                 float potential = potential(x, y, magnets)*200;
                 Main.SKETCH.colorMode(PApplet.HSB);
                 //Main.SKETCH.fill(PApplet.abs(potential)%100+150,255,255);
                 Main.SKETCH.fill(potential%100+200,255,155+potential%100);
                 //System.out.println((potential*1000)%255);
-                Main.SKETCH.rect(x, y, size, size);
+                Main.SKETCH.rect(x, y, SIZE, SIZE);
             }
         }
     }

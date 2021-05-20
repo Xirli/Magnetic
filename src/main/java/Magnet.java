@@ -146,37 +146,7 @@ public class Magnet {
             );
         }
     }
-/*
-    public static void gravity(Magnet mag1, Magnet mag2){
-        for(Particle part1 : mag1.getParticle()){
-            for(Particle part2 : mag2.getParticle()){
 
-                PVector force = ForceGravity(part1, part2);
-                mag1.forceDisplay(force, part1);
-                force.mult(-1);
-                mag2.forceDisplay(force, part2);
-            }
-        }
-    }
-
-    private void forceDisplay(PVector force, Particle part){
-        speed.add( PVector.div(force, mass) );
-
-        if(momentOfInertia == 0) return;
-
-        PVector Moment = force.cross(PVector.add(part.absoluteCoord, PVector.mult(coord,-1)));
-        velocity.add(Moment.div(-momentOfInertia));
-    }
-
-    private static PVector ForceGravity(Particle part1, Particle part2){
-        PVector vector = new PVector();
-        vector.set(part2.absoluteCoord).mult(-1).add(part1.absoluteCoord);
-        float F = KULON * part1.charge * part2.charge / Math.max(vector.magSq(), minRadiusOfParticle);
-        vector.normalize();
-        vector.mult(F);
-        return vector;
-    }
-*/
     @Override
     public String toString() {
         return "Magnet{" + "\n" +
