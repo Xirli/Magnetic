@@ -1,35 +1,36 @@
 import processing.core.PApplet;
-import processing.core.PVector;
 
 import java.util.ArrayList;
 
 public class MyApplet extends PApplet{
 
+    public static final float drawRadiusOfParticle = 1000;
+
     ArrayList<Magnet> magnets;
 
     public void settings(){
-        size(1000, 700);
-        MagnetGenerator.sceneX = 500;
-        MagnetGenerator.sceneY = 350;
+        size(800, 600);
+        MagnetGenerator.sceneX = 400;
+        MagnetGenerator.sceneY = 300;
         magnets = MagnetGenerator.generateParaMagnetic();
-        //magnets = MagnetGenerator.generateMonopole(50);
+    }
+    public void setup() {
+        frameRate(60);
     }
 
+
     public void draw(){
+
+        Physics.update(magnets);
+
         background(0);
-        //translate((float) width/2, (float) height/2);
+        Analizator.potential(magnets);
         for(Magnet mag : magnets) {
             mag.draw();
-            mag.display();
-        }
-        for(Magnet mag1 : magnets) {
-            for(Magnet mag2 : magnets) {
-                Magnet.gravity(mag1, mag2);
-                if(mag1 == mag2)break;
-            }
         }
 
-        //translate((float) -width/2, (float) -height/2);
+        fill(0);
+        text(frameRate, 10,10);
     }
 
     public void mouseDragged(){

@@ -5,20 +5,15 @@ import java.util.Arrays;
 
 public class Magnet {
 
-    public static final float KULON = (float) 5;
-    public static final float minRadiusOfParticle = 5;
-    public static final float drawRadiusOfParticle = 1000;
-    public static final float rotationSlowdown = (float) 0.999;
+    private final PVector coord;
+    private final PVector speed;
 
-    protected final PVector coord;
-    protected final PVector speed;
+    private final PVector angle;
+    private final PVector velocity;
 
-    protected final PVector angle;
-    protected final PVector velocity;
-
-    protected final Particle[] particle;
-    protected float mass;
-    protected float momentOfInertia;
+    private final Particle[] particle;
+    private float mass;
+    private float momentOfInertia;
 
     public Magnet(Particle[] particle){
         this.particle = particle;
@@ -42,6 +37,9 @@ public class Magnet {
         }
     }
 
+    public PVector getCoord(){
+        return coord;
+    }
     public void setCoord(PVector set){
         for(Particle part : particle){
             part.absoluteCoord.add(PVector.mult(coord,-1));
@@ -53,6 +51,9 @@ public class Magnet {
         setCoord(new PVector(x,y,z));
     }
 
+    public PVector getSpeed(){
+        return speed;
+    }
     public void setSpeed(PVector set){
         speed.set(set);
     }
@@ -60,6 +61,12 @@ public class Magnet {
         setSpeed(new PVector(x,y,z));
     }
 
+    public PVector getAngle(){
+        return angle;
+    }
+    public void setAngle(float x, float y, float z) {
+        setAngle(new PVector(x,y,z));
+    }
     public void setAngle(PVector set){
         angle.set(set);
         set.normalize();
@@ -82,20 +89,18 @@ public class Magnet {
         }
     }
     private float matrices0(float angle, float a){
-        return PApplet.cos(angle) + (1 - PApplet.cos(angle))*a*a ;
+        return PApplet.cos(angle) + (1 - PApplet.cos(angle))*a*a;
     }
     private float matrices1(float angle, float a, float b, float c){
-        return (1 - PApplet.cos(angle))*a*b + PApplet.sin(angle)*c  ;
+        return (1 - PApplet.cos(angle))*a*b + PApplet.sin(angle)*c;
     }
     private float matrices2(float angle, float a, float b, float c){
-        return (1 - PApplet.cos(angle))*a*b - PApplet.sin(angle)*c  ;
+        return (1 - PApplet.cos(angle))*a*b - PApplet.sin(angle)*c;
     }
 
-
-    public void setAngle(float x, float y, float z) {
-        setAngle(new PVector(x,y,z));
+    public PVector getVelocity(){
+        return velocity;
     }
-
     public void setVelocity(PVector set){
         velocity.set(set);
     }
@@ -107,10 +112,23 @@ public class Magnet {
         return particle;
     }
 
-    public void display(){
+    public float getMass() {
+        return mass;
+    }
+    public void setMass(float mass) {
+        this.mass = mass;
+    }
+
+    public float getMomentOfInertia() {
+        return momentOfInertia;
+    }
+    public void setMomentOfInertia(float momentOfInertia) {
+        this.momentOfInertia = momentOfInertia;
+    }
+
+    public void run(){
         setCoord(PVector.add(coord, speed));
         setAngle(PVector.add(angle, velocity));
-        angle.mult(rotationSlowdown);
     }
 
     public void draw(){
@@ -123,12 +141,12 @@ public class Magnet {
             Main.SKETCH.ellipse(
                     100*part.absoluteCoord.x/(part.absoluteCoord.z),
                     100*part.absoluteCoord.y/(part.absoluteCoord.z),
-                    drawRadiusOfParticle/(part.absoluteCoord.z),
-                    drawRadiusOfParticle/(part.absoluteCoord.z)
+                    MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z),
+                    MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z)
             );
         }
     }
-
+/*
     public static void gravity(Magnet mag1, Magnet mag2){
         for(Particle part1 : mag1.getParticle()){
             for(Particle part2 : mag2.getParticle()){
@@ -158,7 +176,7 @@ public class Magnet {
         vector.mult(F);
         return vector;
     }
-
+*/
     @Override
     public String toString() {
         return "Magnet{" + "\n" +

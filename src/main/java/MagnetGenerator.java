@@ -1,4 +1,3 @@
-import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -31,21 +30,20 @@ public class MagnetGenerator {
 
     public static Magnet MagnetConstCoord(Particle[] part){
         return new Magnet(part) {
-            public void display() {
+            public void run() {
                 //coord is const
-                setAngle(PVector.add(angle, velocity));
-                angle.mult(rotationSlowdown);
+                setAngle(PVector.add(getAngle(), getVelocity()));
             }
         };
     }
     public static Magnet MagnetMouseCoord(Particle[] part){
         return new Magnet(part){
-            public void display(){
+            public void run(){
                 setCoord(Main.SKETCH.mouseX, Main.SKETCH.mouseY, sceneZ);
                 setSpeed(0,0,0);
             }
             public void draw(){
-                for(Particle part : particle){
+                for(Particle part : getParticle()){
 
                     if(part.absoluteCoord.z < 1) continue;
 
@@ -55,16 +53,16 @@ public class MagnetGenerator {
                     Main.SKETCH.ellipse(
                             (100*part.absoluteCoord.x)/(part.absoluteCoord.z),
                             (100*part.absoluteCoord.y)/(part.absoluteCoord.z),
-                            drawRadiusOfParticle/(part.absoluteCoord.z),
-                            drawRadiusOfParticle/(part.absoluteCoord.z)
+                            MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z),
+                            MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z)
                     );
                     Main.SKETCH.stroke(255);
                     Main.SKETCH.strokeWeight(5);
                     Main.SKETCH.line(
                             (100*part.absoluteCoord.x)/(part.absoluteCoord.z),
                             (100*part.absoluteCoord.y)/(part.absoluteCoord.z),
-                            (100*part.absoluteCoord.x+ speed.x*1000000)/(part.absoluteCoord.z),
-                            (100*part.absoluteCoord.y+ speed.y*1000000)/(part.absoluteCoord.z)
+                            (100*part.absoluteCoord.x + getSpeed().x*1000000)/(part.absoluteCoord.z),
+                            (100*part.absoluteCoord.y + getSpeed().y*1000000)/(part.absoluteCoord.z)
                     );
                     Main.SKETCH.strokeWeight(0);
                 }
