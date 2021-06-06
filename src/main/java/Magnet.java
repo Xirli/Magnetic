@@ -15,8 +15,11 @@ public class Magnet {
     private float mass;
     private float momentOfInertia;
 
-    public Magnet(Particle[] particle){
+    GraphicObject graphic;
+
+    public Magnet(Particle[] particle, GraphicObject graphic){
         this.particle = particle;
+        this.graphic = graphic;
 
         coord = new PVector(0,0,0);
         speed = new PVector(0,0,0);
@@ -132,19 +135,7 @@ public class Magnet {
     }
 
     public void draw(PApplet sketch){
-        for(Particle part : particle){
-
-            if(part.absoluteCoord.z < 1) continue;
-
-            if(part.charge > 0) sketch.fill(255,0,0);
-            else sketch.fill(0,0,255);
-            sketch.ellipse(
-                    100*part.absoluteCoord.x/(part.absoluteCoord.z),
-                    100*part.absoluteCoord.y/(part.absoluteCoord.z),
-                    MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z),
-                    MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z)
-            );
-        }
+        graphic.draw(sketch, this);
     }
 
     @Override

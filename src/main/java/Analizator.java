@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class Analizator {
 
-    public static float SIZE = 3;
+    public static float SIZE = 5;
 
     public static void potential(PApplet sketch, ArrayList<Magnet> magnets){
         sketch.colorMode(PApplet.HSB);
         for(int x = 0; x < sketch.width; x += SIZE){
             for(int y = 0; y < sketch.height; y += SIZE){
                 double potential = potential(x, y, magnets)*200;
-                float brightness = (float) Math.sqrt(Math.abs(potential))*100;
+                //float brightness = (float) Math.sqrt(Math.abs(potential))*100;
+                float brightness = 255;
                 float hue = (float) Math.max(potential,-50) + 206;
 
                 sketch.fill(hue, 255, brightness);

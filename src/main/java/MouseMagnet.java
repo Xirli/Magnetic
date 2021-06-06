@@ -4,8 +4,8 @@ public class MouseMagnet extends Magnet{
 
     PApplet sketch;
 
-    public MouseMagnet(Particle[] particle, PApplet sketch) {
-        super(particle);
+    public MouseMagnet(Particle[] particle, PApplet sketch, GraphicObject graphic) {
+        super(particle, graphic);
         this.sketch = sketch;
     }
 

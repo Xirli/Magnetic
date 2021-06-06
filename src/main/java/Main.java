@@ -6,14 +6,14 @@ import static java.lang.Thread.sleep;
 
 public class Main{
 
-    public static final long MS_PER_FRAME = 15;
+    public static final long MS_PER_FRAME = 10;
 
     public static void main(String[] args){
         ArrayList<Magnet> magnets = new ArrayList<>();
         MyApplet sketch = new MyApplet(magnets);
 
-        magnets.addAll(MagnetGenerator.generateParaMagnetic());
-        magnets.add(MagnetGenerator.generateMouseMagnet(sketch));
+        magnets.addAll(MagnetGenerator.generateParaMagnetic(GraphicGenerator.blackWhiteCircle()));
+        magnets.add(MagnetGenerator.generateMouseMagnet(sketch, GraphicGenerator.testCharge()));
 
         PApplet.runSketch(new String[]{"MySketch"}, sketch);
         updateLoop(magnets);

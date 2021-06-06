@@ -6,7 +6,7 @@ public class Physics {
 
     public static final float KULON = (float) 5;
     public static final float minRadiusOfParticle = 5;
-    public static final float rotationSlowdown = (float) 1.000;
+    public static final float rotationSlowdown = (float) 0.999;
 
     public static void update(ArrayList<Magnet> magnets){
         for(Magnet mag : magnets) {
