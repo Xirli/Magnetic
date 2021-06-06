@@ -12,10 +12,13 @@ import java.util.ArrayList;
         this.magnets = magnets;
     }
 
+    //TODO определить отдельный класс (интерфейс), в котором описать константы
     public void settings(){
+        //TODO Выделить в отдельный класс как константы
         size(800, 600);
     }
     public void setup() {
+        //TODO Выделить в отдельный класс как константу
         frameRate(60);
     }
 
