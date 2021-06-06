@@ -6,7 +6,7 @@ public class Physics {
 
     public static final float KULON = (float) 5;
     public static final float minRadiusOfParticle = 5;
-    public static final float rotationSlowdown = (float) 1.0001;
+    public static final float rotationSlowdown = (float) 1.000;
 
     public static void update(ArrayList<Magnet> magnets){
         for(Magnet mag : magnets) {
@@ -33,13 +33,11 @@ public class Physics {
     }
 
     public static void forceDisplay(Magnet mag, PVector force, Particle part){
-        //mag.getSpeed().add( PVector.div(force, mag.getMass()) );
         mag.setSpeed( PVector.add(mag.getSpeed(), PVector.div(force, mag.getMass()) ) );
 
         if(mag.getMomentOfInertia() == 0) return;
 
         PVector Moment = force.cross(PVector.add(part.absoluteCoord, PVector.mult(mag.getCoord(),-1)));
-        //mag.getVelocity().add(Moment.div(-mag.getMomentOfInertia()));
         mag.setVelocity( PVector.add(mag.getVelocity(), Moment.div(-mag.getMomentOfInertia())) );
     }
 

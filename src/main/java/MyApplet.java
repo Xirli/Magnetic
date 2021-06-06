@@ -2,17 +2,18 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-public class MyApplet extends PApplet{
+    public class MyApplet extends PApplet{
 
     public static final float drawRadiusOfParticle = 1000;
 
     ArrayList<Magnet> magnets;
 
+    MyApplet(ArrayList<Magnet> magnets){
+        this.magnets = magnets;
+    }
+
     public void settings(){
         size(800, 600);
-        MagnetGenerator.sceneX = 400;
-        MagnetGenerator.sceneY = 300;
-        magnets = MagnetGenerator.generateParaMagnetic();
     }
     public void setup() {
         frameRate(60);
@@ -20,15 +21,11 @@ public class MyApplet extends PApplet{
 
 
     public void draw(){
-
-        Physics.update(magnets);
-
         background(0);
-        Analizator.potential(magnets);
+        Analizator.potential(this, magnets);
         for(Magnet mag : magnets) {
-            mag.draw();
+            mag.draw(this);
         }
-
         fill(0);
         text(frameRate, 10,10);
     }

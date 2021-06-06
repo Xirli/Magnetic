@@ -131,14 +131,14 @@ public class Magnet {
         setAngle(PVector.add(angle, velocity));
     }
 
-    public void draw(){
+    public void draw(PApplet sketch){
         for(Particle part : particle){
 
             if(part.absoluteCoord.z < 1) continue;
 
-            if(part.charge > 0) Main.SKETCH.fill(255,0,0);
-            else Main.SKETCH.fill(0,0,255);
-            Main.SKETCH.ellipse(
+            if(part.charge > 0) sketch.fill(255,0,0);
+            else sketch.fill(0,0,255);
+            sketch.ellipse(
                     100*part.absoluteCoord.x/(part.absoluteCoord.z),
                     100*part.absoluteCoord.y/(part.absoluteCoord.z),
                     MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z),
