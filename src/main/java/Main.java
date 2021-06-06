@@ -6,6 +6,7 @@ import static java.lang.Thread.sleep;
 
 public class Main{
 
+    //TODO Выделить константу в отдельный класс
     public static final long MS_PER_FRAME = 10;
 
     public static void main(String[] args){

@@ -3,7 +3,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 public class Physics {
-
+    //TODO Вынести константы в отдельный класс; класс унаследовать/статически импортировать
     public static final float KULON = (float) 5;
     public static final float minRadiusOfParticle = 5;
     public static final float rotationSlowdown = (float) 0.999;

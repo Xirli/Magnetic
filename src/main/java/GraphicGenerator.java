@@ -13,6 +13,7 @@ public class GraphicGenerator {
                 sketch.ellipse(
                         100*part.absoluteCoord.x/(part.absoluteCoord.z),
                         100*part.absoluteCoord.y/(part.absoluteCoord.z),
+                        //TODO выделить константу в отдельный интерфейс
                         MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z),
                         MyApplet.drawRadiusOfParticle/(part.absoluteCoord.z)
                 );

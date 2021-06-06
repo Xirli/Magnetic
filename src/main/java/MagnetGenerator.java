@@ -4,7 +4,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 public class MagnetGenerator {
-
+    //TODO выделить константы в отдельный класс
     public static float sceneX = 400;
     public static float sceneY = 300;
     public static float sceneZ = 100;
@@ -30,6 +30,7 @@ public class MagnetGenerator {
     }
 
     public static Magnet MagnetConstCoord(Particle[] part, GraphicObject graphic){
+        //TODO Описать класс, который наследуюет Magnet и переопределить в нём метод
         return new Magnet(part, graphic) {
             public void run() {
                 //coord is const
