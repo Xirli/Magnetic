@@ -2,7 +2,7 @@ package Model;
 
 import View.GraphicObject;
 import processing.core.PApplet;
-
+//package magnet
 public class MouseMagnet extends Magnet{
 
     PApplet sketch;

@@ -1,5 +1,5 @@
 package Model;
-
+// I N T E R F A C E
 public class Param {
     public static float sceneX = 400;
     public static float sceneY = 300;

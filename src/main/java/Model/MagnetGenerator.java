@@ -7,7 +7,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 
 import static Model.Param.*;
-
+//package magnet
 public class MagnetGenerator {
 
     public static Particle[] monopole(float charge, float particleMass){
