@@ -1,15 +1,19 @@
+package View;
+
+import Model.Magnet;
+import Model.Particle;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-public class Analizator {
+import static View.Param.analysisSize;
 
-    public static float SIZE = 5;
+public class Analyzer {
 
     public static void potential(PApplet sketch, ArrayList<Magnet> magnets){
         sketch.colorMode(PApplet.HSB);
-        for(int x = 0; x < sketch.width; x += SIZE){
-            for(int y = 0; y < sketch.height; y += SIZE){
+        for(int x = 0; x < sketch.width; x += analysisSize){
+            for(int y = 0; y < sketch.height; y += analysisSize){
                 double potential = potential(x, y, magnets)*200;
                 //float brightness = (float) Math.sqrt(Math.abs(potential))*100;
                 float brightness = 255;
@@ -17,7 +21,7 @@ public class Analizator {
 
                 sketch.fill(hue, 255, brightness);
                 sketch.stroke(hue, 255, brightness);
-                sketch.rect(x, y, SIZE, SIZE);
+                sketch.rect(x, y, analysisSize, analysisSize);
             }
         }
     }

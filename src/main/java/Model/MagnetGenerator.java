@@ -1,13 +1,14 @@
+package Model;
+
+import View.GraphicObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 
+import static Model.Param.*;
+
 public class MagnetGenerator {
-    //TODO выделить константы в отдельный класс
-    public static float sceneX = 400;
-    public static float sceneY = 300;
-    public static float sceneZ = 100;
 
     public static Particle[] monopole(float charge, float particleMass){
         return multipole(1, 0, charge, particleMass);
@@ -29,15 +30,6 @@ public class MagnetGenerator {
         }return particle;
     }
 
-    public static Magnet MagnetConstCoord(Particle[] part, GraphicObject graphic){
-        //TODO Описать класс, который наследуюет Magnet и переопределить в нём метод
-        return new Magnet(part, graphic) {
-            public void run() {
-                //coord is const
-                setAngle(PVector.add(getAngle(), getVelocity()));
-            }
-        };
-    }
     public static Magnet generateMouseMagnet(PApplet sketch, GraphicObject graphic){
         Magnet m = new MouseMagnet(monopole((float) 0.01, (float) 0.01), sketch, graphic);
         m.setCoord(sceneX, sceneY, sceneZ);
@@ -81,7 +73,7 @@ public class MagnetGenerator {
         for(int i = -width/2; i < (width+1)/2; i++) {
             for(int j = -height/2; j < (height+1)/2; j++) {
 
-                Magnet m = MagnetConstCoord(dipole(10, 5, 5), graphic);
+                Magnet m = new ConstCoordMagnet(dipole(10, 5, 5), graphic);
 
                 m.setCoord(i * dist + sceneX,j * dist + sceneY, sceneZ);
                 //m.setVelocity(0,  0, (float) ((float) 0.0*((PApplet.abs(j)%2)-0.5)));
@@ -101,7 +93,7 @@ public class MagnetGenerator {
         ArrayList<Magnet> magnets = new ArrayList<>();
 
         for(int i = 2; i <= colRadius; i++) {
-            Magnet m = MagnetConstCoord(multipole(colPart++, radius * i, 5, 1), graphic);
+            Magnet m = new ConstCoordMagnet(multipole(colPart++, radius * i, 5, 1), graphic);
             m.setCoord(sceneX, sceneY, sceneZ);
             m.setVelocity(0,  0, (float) 0.001*0);
             magnets.add(m);

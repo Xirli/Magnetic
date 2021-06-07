@@ -1,12 +1,12 @@
+package Model;
+
 import processing.core.PVector;
 
 import java.util.ArrayList;
 
+import static Model.Param.*;
+
 public class Physics {
-    //TODO Вынести константы в отдельный класс; класс унаследовать/статически импортировать
-    public static final float KULON = (float) 5;
-    public static final float minRadiusOfParticle = 5;
-    public static final float rotationSlowdown = (float) 0.999;
 
     public static void update(ArrayList<Magnet> magnets){
         for(Magnet mag : magnets) {
@@ -44,7 +44,7 @@ public class Physics {
     public static PVector ForceGravity(Particle part1, Particle part2){
         PVector vector = new PVector();
         vector.set(part2.absoluteCoord).mult(-1).add(part1.absoluteCoord);
-        float F = KULON * part1.charge * part2.charge / Math.max(vector.magSq(), minRadiusOfParticle);
+        float F = kulon * part1.charge * part2.charge / Math.max(vector.magSq(), minRadiusOfParticle);
         vector.normalize();
         vector.mult(F);
         return vector;

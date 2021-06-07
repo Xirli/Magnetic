@@ -1,15 +1,20 @@
+package Controller;
+
+import Model.Magnet;
+import Model.MagnetGenerator;
+import Model.Physics;
+import View.GraphicGenerator;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
 
+import static Controller.Param.msPerUpdateModel;
 import static java.lang.Thread.sleep;
 
 public class Main{
 
-    //TODO Выделить константу в отдельный класс
-    public static final long MS_PER_FRAME = 10;
-
     public static void main(String[] args){
+
         ArrayList<Magnet> magnets = new ArrayList<>();
         MyApplet sketch = new MyApplet(magnets);
 
@@ -26,7 +31,7 @@ public class Main{
             long start = System.currentTimeMillis();
             Physics.update(magnets);
             try {
-                long timeSleep = start + MS_PER_FRAME - System.currentTimeMillis();
+                long timeSleep = start + msPerUpdateModel - System.currentTimeMillis();
                 if(timeSleep > 0) sleep(timeSleep);
             } catch(InterruptedException ignored){}
         }

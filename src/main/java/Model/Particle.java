@@ -1,3 +1,5 @@
+package Model;
+
 import processing.core.PVector;
 
 public class Particle {
@@ -24,7 +26,7 @@ public class Particle {
 
     @Override
     public String toString() {
-        return "Particle{" +
+        return "Model.Particle{" +
                 "coord=" + coord +
                 ", absoluteCoord=" + absoluteCoord +
                 ", charge=" + charge +

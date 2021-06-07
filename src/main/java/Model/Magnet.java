@@ -1,3 +1,6 @@
+package Model;
+
+import View.GraphicObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -140,7 +143,7 @@ public class Magnet {
 
     @Override
     public String toString() {
-        return "Magnet{" + "\n" +
+        return "Model.Magnet{" + "\n" +
                 "coord=" + coord + "\n" +
                 ", speed=" + speed + "\n" +
                 ", angle=" + angle + "\n" +
