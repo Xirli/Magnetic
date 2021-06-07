@@ -1,9 +1,8 @@
-package Model;
+package model.magnet;
 
-import View.GraphicObject;
+import view.GraphicObject;
 import processing.core.PVector;
 
-//package magnet
 public class ConstCoordMagnet extends Magnet{
     public ConstCoordMagnet(Particle[] particle, GraphicObject graphic) {
         super(particle, graphic);

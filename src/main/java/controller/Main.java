@@ -1,14 +1,14 @@
-package Controller;
+package controller;
 
-import Model.Magnet;
-import Model.MagnetGenerator;
-import Model.Physics;
-import View.GraphicGenerator;
+import model.magnet.Magnet;
+import model.magnet.MagnetGenerator;
+import model.service.Physics;
+import view.GraphicGenerator;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-import static Controller.Param.msPerUpdateModel;
+import static controller.Param.msPerUpdateModel;
 import static java.lang.Thread.sleep;
 
 public class Main{

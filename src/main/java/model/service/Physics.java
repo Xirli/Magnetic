@@ -1,12 +1,13 @@
-package Model;
+package model.service;
 
+import model.magnet.Magnet;
+import model.magnet.Particle;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static Model.Param.*;
+import static model.Param.*;
 
-//package service
 public class Physics {
 
     public static void update(ArrayList<Magnet> magnets){

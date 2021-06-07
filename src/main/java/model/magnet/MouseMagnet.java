@@ -1,8 +1,8 @@
-package Model;
+package model.magnet;
 
-import View.GraphicObject;
+import view.GraphicObject;
 import processing.core.PApplet;
-//package magnet
+
 public class MouseMagnet extends Magnet{
 
     PApplet sketch;

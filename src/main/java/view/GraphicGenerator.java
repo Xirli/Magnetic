@@ -1,8 +1,8 @@
-package View;
+package view;
 
-import Model.Particle;
+import model.magnet.Particle;
 
-import static View.Param.drawRadiusOfParticle;
+import static view.Param.drawRadiusOfParticle;
 
 public class GraphicGenerator {
 

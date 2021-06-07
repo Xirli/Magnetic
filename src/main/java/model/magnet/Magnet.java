@@ -1,12 +1,11 @@
-//package naming not capitalized
-package Model;
+package model.magnet;
 
-import View.GraphicObject;
+import view.GraphicObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.Arrays;
-//package magnet
+
 public class Magnet {
 
     private final PVector coord;

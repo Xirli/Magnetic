@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Model.Magnet;
+import model.magnet.Magnet;
 import processing.core.PApplet;
 
 public interface GraphicObject {

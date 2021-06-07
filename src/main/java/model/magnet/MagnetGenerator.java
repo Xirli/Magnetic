@@ -1,13 +1,13 @@
-package Model;
+package model.magnet;
 
-import View.GraphicObject;
+import view.GraphicObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static Model.Param.*;
-//package magnet
+import static model.Param.*;
+
 public class MagnetGenerator {
 
     public static Particle[] monopole(float charge, float particleMass){

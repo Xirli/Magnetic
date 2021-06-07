@@ -1,12 +1,12 @@
-package View;
+package view;
 
-import Model.Magnet;
-import Model.Particle;
+import model.magnet.Magnet;
+import model.magnet.Particle;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-import static View.Param.analysisSize;
+import static view.Param.analysisSize;
 
 public class Analyzer {
 

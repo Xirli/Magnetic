@@ -1,4 +1,4 @@
-package Model;
+package model.magnet;
 
 import processing.core.PVector;
 
