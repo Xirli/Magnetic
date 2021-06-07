@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import static Model.Param.*;
 
+//package service
 public class Physics {
 
     public static void update(ArrayList<Magnet> magnets){
