@@ -31,16 +31,18 @@ public class Magnet {
 
         PVector coordOfCenter = new PVector(0,0,0);
 
-        for(Particle part : particle){
+        for(Particle part : this.particle){
             mass += part.mass;
             coordOfCenter.add(PVector.mult(part.coord, part.mass));
         }
         coordOfCenter.div(mass);
 
-        for(Particle part : particle){
+        for(Particle part : this.particle){
             part.coord.sub(coordOfCenter);
             momentOfInertia += part.mass * part.coord.magSq();
         }
+
+        coord.set(coordOfCenter);
     }
 
     public PVector getCoord(){
@@ -121,15 +123,9 @@ public class Magnet {
     public float getMass() {
         return mass;
     }
-    public void setMass(float mass) {
-        this.mass = mass;
-    }
 
     public float getMomentOfInertia() {
         return momentOfInertia;
-    }
-    public void setMomentOfInertia(float momentOfInertia) {
-        this.momentOfInertia = momentOfInertia;
     }
 
     public void run(){
