@@ -17,8 +17,8 @@ public class Physics {
         }
         for(Magnet mag1 : magnets) {
             for(Magnet mag2 : magnets) {
-                gravity(mag1, mag2);
                 if(mag1 == mag2)break;
+                gravity(mag1, mag2);
             }
         }
     }
@@ -34,22 +34,22 @@ public class Physics {
         }
     }
 
+    public static PVector forceGravity(Particle part1, Particle part2){
+        PVector vector = new PVector();
+        vector.set(part2.absoluteCoord).mult(-1).add(part1.absoluteCoord);
+        float F = kulon * part1.charge * part2.charge / Math.max(vector.magSq(), minRadiusOfParticle*minRadiusOfParticle);
+        vector.normalize();
+        vector.mult(F);
+        return vector;
+    }
+
     public static void forceDisplay(Magnet mag, PVector force, Particle part){
-        mag.setSpeed( PVector.add(mag.getSpeed(), PVector.div(force, mag.getMass()) ) );
+        mag.setSpeed( PVector.add(mag.getSpeed(), PVector.div(force, mag.getMass())));
 
         if(mag.getMomentOfInertia() == 0) return;
 
         PVector Moment = force.cross(PVector.add(part.absoluteCoord, PVector.mult(mag.getCoord(),-1)));
         mag.setVelocity( PVector.add(mag.getVelocity(), Moment.div(-mag.getMomentOfInertia())) );
-    }
-
-    public static PVector forceGravity(Particle part1, Particle part2){
-        PVector vector = new PVector();
-        vector.set(part2.absoluteCoord).mult(-1).add(part1.absoluteCoord);
-        float F = kulon * part1.charge * part2.charge / Math.max(vector.magSq(), minRadiusOfParticle);
-        vector.normalize();
-        vector.mult(F);
-        return vector;
     }
 
 }
