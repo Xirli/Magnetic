@@ -14,11 +14,10 @@ import static java.lang.Thread.sleep;
 public class Main{
 
     public static void main(String[] args){
-
         ArrayList<Magnet> magnets = new ArrayList<>();
         MyApplet sketch = new MyApplet(magnets);
 
-        magnets.addAll(MagnetGenerator.generateParaMagnetic(GraphicGenerator.blackWhiteCircle()));
+        magnets.addAll(MagnetGenerator.generateDipole(GraphicGenerator.blackWhiteCircle()));
         magnets.add(MagnetGenerator.generateMouseMagnet(sketch, GraphicGenerator.testCharge()));
 
         PApplet.runSketch(new String[]{"MySketch"}, sketch);

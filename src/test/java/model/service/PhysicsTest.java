@@ -1,11 +1,13 @@
 package model.service;
 
-import model.Param;
 import model.magnet.Magnet;
+import model.magnet.MagnetStub;
 import model.magnet.Particle;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import processing.core.PVector;
+
+import java.util.ArrayList;
 
 import static model.Param.kulon;
 import static model.Param.minRadiusOfParticle;
@@ -25,6 +27,60 @@ public class PhysicsTest {
             throw e;
         }
     }
+
+    public static MagnetStub randomMagnetStub(int count){
+        Particle[] particle = new Particle[count];
+        for (int i = 0; i < count; i++) {
+            particle[i] = new Particle(new PVector((float)Math.random(),(float)Math.random(),(float)Math.random()),
+                    (float)Math.random(),(float)Math.random());
+        }
+        return new MagnetStub(particle, (s, m) -> { });
+    }
+
+    @Test
+    public void update(){
+        ArrayList<Magnet> magnets = new ArrayList<Magnet>();
+        magnets.add(randomMagnetStub(3));
+        magnets.add(randomMagnetStub(4));
+        magnets.add(randomMagnetStub(5));
+
+        Physics.update(magnets);
+
+        assertEquals(((MagnetStub)magnets.get(0)).runCount, 1);
+        assertEquals(((MagnetStub)magnets.get(0)).speedCount, 3*(4+5));
+        assertEquals(((MagnetStub)magnets.get(0)).velocityCount, 3*(4+5)+1);
+    }
+
+    @Test
+    public void gravity(){
+        int count1 = 5;
+        int count2 = 5;
+        MagnetStub mag1 = randomMagnetStub(count1);
+        MagnetStub mag2 = randomMagnetStub(count2);
+
+        Physics.gravity(mag1, mag2);
+
+        assertEquals(mag1.velocityCount,count1*count2);
+        assertEquals(mag1.speedCount, count1*count2);
+        assertEquals(mag2.velocityCount, count1*count2);
+        assertEquals(mag2.speedCount, count1*count2);
+    }
+
+    @Test
+    public void gravityOneParticle(){
+        int count1 = 1;
+        int count2 = 5;
+        MagnetStub mag1 = randomMagnetStub(count1);
+        MagnetStub mag2 = randomMagnetStub(count2);
+
+        Physics.gravity(mag1, mag2);
+
+        assertEquals(mag1.velocityCount,0);
+        assertEquals(mag1.speedCount, count1*count2);
+        assertEquals(mag2.velocityCount, count1*count2);
+        assertEquals(mag2.speedCount, count1*count2);
+    }
+
 
     @Test
     public void forceDisplay(){

@@ -7,5 +7,5 @@ public interface Param {
 
     float kulon = (float) 5;
     float minRadiusOfParticle = 5;
-    float rotationSlowdown = (float) 0.999;
+    float rotationSlowdown = (float) 0.99999;
 }

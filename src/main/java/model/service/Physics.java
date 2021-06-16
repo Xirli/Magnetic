@@ -15,6 +15,7 @@ public class Physics {
             mag.run();
             mag.setVelocity(PVector.mult(mag.getVelocity(), rotationSlowdown));
         }
+
         for(Magnet mag1 : magnets) {
             for(Magnet mag2 : magnets) {
                 if(mag1 == mag2)break;
