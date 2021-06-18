@@ -72,7 +72,7 @@ public class MouseMagnetTest {
         PApplet sketch = new PApplet();
         Magnet magnet = new MouseMagnet(particle, sketch, (s, m) -> { });
 
-        magnet.setSpeed(1,1,1);
+        magnet.setSpeed(-1,-1,1);
         magnet.setVelocity((float) Math.PI/2,0,0);
         sketch.mouseX = 1;
         sketch.mouseY = 1;
@@ -83,8 +83,8 @@ public class MouseMagnetTest {
                 new Particle(new PVector(+1,+1,+1),1,1),
                 new Particle(new PVector(-1,-1,-1),1,1)
         };
-        particleResult[0].absoluteCoord.set(2,0,2);
-        particleResult[1].absoluteCoord.set(0,2,0);
+        particleResult[0].absoluteCoord.set(2,0, 1);
+        particleResult[1].absoluteCoord.set(0,2,-1);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
