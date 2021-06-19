@@ -75,12 +75,11 @@ public class PhysicsTest {
 
         Physics.gravity(mag1, mag2);
 
-        assertEquals(mag1.velocityCount,0);
+        assertEquals(mag1.velocityCount, 0);
         assertEquals(mag1.speedCount, count1*count2);
         assertEquals(mag2.velocityCount, count1*count2);
-        assertEquals(mag2.speedCount, count1*count2);
+        assertEquals(mag1.speedCount,count1*count2);
     }
-
 
     @Test
     public void forceDisplay(){

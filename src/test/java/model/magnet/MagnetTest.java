@@ -98,7 +98,7 @@ public class MagnetTest {
         };
         Magnet magnet = new Magnet(particle, (s, m) -> { });
 
-        magnet.setAngle((float) Math.PI/2, 0,0);
+        magnet.rotate((float) Math.PI/2, 0,0);
 
         Particle[] particleResult = new Particle[]{
                 new Particle(new PVector(+1,+1,+1),1,1),
@@ -118,7 +118,7 @@ public class MagnetTest {
         };
         Magnet magnet = new Magnet(particle, (s, m) -> { });
 
-        magnet.setAngle(0,(float) Math.PI/2,0);
+        magnet.rotate(0,(float) Math.PI/2,0);
 
         Particle[] particleResult = new Particle[]{
                 new Particle(new PVector(+1,+1,+1),1,1),
@@ -138,7 +138,7 @@ public class MagnetTest {
         };
         Magnet magnet = new Magnet(particle, (s, m) -> { });
 
-        magnet.setAngle(0,0,(float) Math.PI/2);
+        magnet.rotate(0,0,(float) Math.PI/2);
 
         Particle[] particleResult = new Particle[]{
                 new Particle(new PVector(+1,+1,+1),1,1),
@@ -158,7 +158,7 @@ public class MagnetTest {
         };
         Magnet magnet = new Magnet(particle, (s, m) -> { });
 
-        magnet.setAngle((float) (-Math.PI/2/Math.sqrt(2)),(float) (Math.PI/2/Math.sqrt(2)),0);
+        magnet.rotate((float) (-Math.PI/2/Math.sqrt(2)),(float) (Math.PI/2/Math.sqrt(2)),0);
 
         Particle[] particleResult = new Particle[]{
                 new Particle(new PVector(+1,+1,0),1,1),
@@ -178,7 +178,7 @@ public class MagnetTest {
         };
         Magnet magnet = new Magnet(particle, (s, m) -> { });
 
-        magnet.setAngle((float) (Math.PI/Math.sqrt(3)),(float) (Math.PI/Math.sqrt(3)),(float) (Math.PI/Math.sqrt(3)));
+        magnet.rotate((float) (Math.PI/Math.sqrt(3)),(float) (Math.PI/Math.sqrt(3)),(float) (Math.PI/Math.sqrt(3)));
 
         Particle[] particleResult = new Particle[]{
                 new Particle(new PVector(-1,+1,0),1,1),

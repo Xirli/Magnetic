@@ -3,7 +3,6 @@ package model.magnet;
 import processing.core.PVector;
 
 public class Particle {
-
     public final PVector coord;
     public final PVector absoluteCoord;
 

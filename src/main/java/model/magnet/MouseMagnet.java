@@ -16,6 +16,7 @@ public class MouseMagnet extends Magnet{
     public void run(){
         setCoord(sketch.mouseX, sketch.mouseY, getCoord().z);
         setSpeed(0,0,0);
-        setAngle(PVector.add(getAngle(), getVelocity()));
+        //setAngle(PVector.add(getAngle(), getVelocity()));
+        rotate(getVelocity());
     }
 }

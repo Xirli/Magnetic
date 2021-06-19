@@ -73,9 +73,9 @@ public class Magnet {
         return angle;
     }
     public void setAngle(float x, float y, float z) {
-        setAngle(new PVector(x,y,z));
+        //setAngle(new PVector(x,y,z));
     }
-    public void setAngle(PVector set){
+    public void setAngle(PVector set){/*
         angle.set(set);
         set.normalize();
         float fi = angle.mag();
@@ -94,7 +94,30 @@ public class Magnet {
             newCoord.add(coord);
 
             part.absoluteCoord.set(newCoord);
+        }*/
+    }
+    public void rotate(PVector vel){
+        float fi = vel.mag();
+        vel.normalize();
+
+        for(Particle part : particle){
+            float x = part.absoluteCoord.x - coord.x;
+            float y = part.absoluteCoord.y - coord.y;
+            float z = part.absoluteCoord.z - coord.z;
+
+            PVector newCoord = new PVector();
+
+            newCoord.x = x * matrices0(fi, vel.x)               + y * matrices2(fi, vel.x, vel.y, vel.z) + z * matrices1(fi, vel.x, vel.z, vel.y);
+            newCoord.y = x * matrices1(fi, vel.y, vel.x, vel.z) + y * matrices0(fi, vel.y)               + z * matrices2(fi, vel.y, vel.z, vel.x);
+            newCoord.z = x * matrices2(fi, vel.z, vel.x, vel.y) + y * matrices1(fi, vel.z, vel.y, vel.x) + z * matrices0(fi, vel.z);
+
+            newCoord.add(coord);
+
+            part.absoluteCoord.set(newCoord);
         }
+    }
+    public void rotate(float x, float y, float z) {
+        rotate(new PVector(x,y,z));
     }
     private float matrices0(float angle, float a){
         return PApplet.cos(angle) + (1 - PApplet.cos(angle))*a*a;
@@ -130,7 +153,8 @@ public class Magnet {
 
     public void run(){
         setCoord(PVector.add(coord, speed));
-        setAngle(PVector.add(angle, velocity));
+        //setAngle(PVector.add(angle, velocity));
+        rotate(velocity);
     }
 
     public void draw(PApplet sketch){

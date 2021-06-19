@@ -10,6 +10,7 @@ public class ConstCoordMagnet extends Magnet{
 
     public void run() {
         //coord is const
-        setAngle(PVector.add(getAngle(), getVelocity()));
+        //setAngle(PVector.add(getAngle(), getVelocity()));
+        rotate(getVelocity());
     }
 }
