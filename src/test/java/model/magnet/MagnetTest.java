@@ -257,7 +257,7 @@ public class MagnetTest {
         magnet.run();
 
         magnet.setSpeed(2,2,2);
-        magnet.setVelocity(0,(float) Math.PI/2,0);
+        magnet.getVelocity().add(new PVector((float) -Math.PI/2,(float) Math.PI/2,0));
 
         magnet.run();
 

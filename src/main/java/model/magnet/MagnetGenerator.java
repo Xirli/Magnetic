@@ -49,7 +49,7 @@ public class MagnetGenerator {
 
     public static ArrayList<Magnet> generateDipole(GraphicObject graphic){
 
-        int count = 1;
+        int count = 10;
         int radius = 10;
 
         ArrayList<Magnet> magnets = new ArrayList<>();

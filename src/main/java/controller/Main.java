@@ -18,7 +18,7 @@ public class Main{
         MyApplet sketch = new MyApplet(magnets);
 
         magnets.addAll(MagnetGenerator.generateDipole( GraphicGenerator.blackWhiteCircle()));
-        magnets.add(MagnetGenerator.generateMouseMagnet(sketch, GraphicGenerator.testCharge()));
+        //magnets.add(MagnetGenerator.generateMouseMagnet(sketch, GraphicGenerator.testCharge()));
 
         PApplet.runSketch(new String[]{"MySketch"}, sketch);
         updateLoop(magnets);

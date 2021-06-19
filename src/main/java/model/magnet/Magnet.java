@@ -62,7 +62,9 @@ public class Magnet {
         setSpeed(new PVector(x,y,z));
     }
 
-    public void rotate(PVector vel){
+    public void rotate(PVector velocity){
+        PVector vel = new PVector();
+        vel.set(velocity);
         float fi = vel.mag();
         vel.normalize();
 
