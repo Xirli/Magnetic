@@ -11,14 +11,14 @@ public class ParticleTest {
     public void sqDist() {
         Particle part1 = new Particle(new PVector(0,0,0), 0 ,0);
         Particle part2 = new Particle(new PVector(3,4,12), 0 ,0);
-        assertEquals(Particle.sqDist(part1, part2), 169);
+        assertEquals(169, Particle.sqDist(part1, part2));
     }
 
     @Test
     public void sqZeroDist() {
         Particle part1 = new Particle(new PVector(0,0,0), 0 ,0);
         Particle part2 = new Particle(new PVector(0,0,0), 0 ,0);
-        assertEquals(Particle.sqDist(part1, part2), 0);
+        assertEquals(0, Particle.sqDist(part1, part2));
     }
 
 }

@@ -11,19 +11,19 @@ import java.util.ArrayList;
 
 import static model.ParamModel.kulon;
 import static model.ParamModel.minRadiusOfParticle;
+import static model.ParamModelTest.accuracy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 public class PhysicsTest {
 
-    public void assertEqualsPVector(PVector vector1, PVector vector2){
+    public void assertEqualsPVector(PVector expected, PVector actual){
         try {
-            assertEquals(vector1.x, vector2.x, 1E-5);
-            assertEquals(vector1.y, vector2.y, 1E-5);
-            assertEquals(vector1.z, vector2.z, 1E-5);
+            assertEquals(expected.x, actual.x, accuracy);
+            assertEquals(expected.y, actual.y, accuracy);
+            assertEquals(expected.z, actual.z, accuracy);
         }catch(AssertionFailedError e){
-            System.out.println("Expected:" + vector1);
-            System.out.println("Actual  :" + vector2);
+            System.out.println("Expected:" + expected);
+            System.out.println("Actual  :" + actual);
             System.out.println();
             throw e;
         }
@@ -47,9 +47,9 @@ public class PhysicsTest {
 
         Physics.update(magnets);
 
-        assertEquals(((MagnetStub)magnets.get(0)).runCount, 1);
-        assertEquals(((MagnetStub)magnets.get(0)).speedCount, 3*(4+5));
-        assertEquals(((MagnetStub)magnets.get(0)).velocityCount, 3*(4+5)+1);
+        assertEquals(1, ((MagnetStub)magnets.get(0)).runCount);
+        assertEquals(3*(4+5), ((MagnetStub)magnets.get(0)).speedCount);
+        assertEquals(3*(4+5)+1, ((MagnetStub)magnets.get(0)).velocityCount);
     }
 
     @Test
@@ -61,10 +61,10 @@ public class PhysicsTest {
 
         Physics.gravity(mag1, mag2);
 
-        assertEquals(mag1.velocityCount,count1*count2);
-        assertEquals(mag1.speedCount, count1*count2);
-        assertEquals(mag2.velocityCount, count1*count2);
-        assertEquals(mag2.speedCount, count1*count2);
+        assertEquals(count1*count2, mag1.velocityCount);
+        assertEquals(count1*count2, mag1.speedCount);
+        assertEquals(count1*count2, mag2.velocityCount);
+        assertEquals(count1*count2, mag2.speedCount);
     }
 
     @Test
@@ -78,10 +78,10 @@ public class PhysicsTest {
 
         System.out.println(mag2.velocityCount);
 
-        assertEquals(mag1.velocityCount, count1*count2);
-        assertEquals(mag1.speedCount, count1*count2);
-        assertEquals(mag2.velocityCount, 0);
-        assertEquals(mag1.speedCount,count1*count2);
+        assertEquals(count1*count2, mag1.velocityCount);
+        assertEquals(count1*count2, mag1.speedCount);
+        assertEquals(0, mag2.velocityCount);
+        assertEquals(count1*count2, mag1.speedCount);
     }
 
     @Test
@@ -96,8 +96,8 @@ public class PhysicsTest {
 
         Physics.forceDisplay(magnet, new PVector(1,1,0), particle[0]);
 
-        assertEqualsPVector(magnet.getSpeed(), new PVector(1.1f,2.1f,3));
-        assertEqualsPVector(magnet.getVelocity(), new PVector(4,5,6.05f));
+        assertEqualsPVector(new PVector(1.1f,2.1f,3), magnet.getSpeed());
+        assertEqualsPVector(new PVector(4,5,6.05f), magnet.getVelocity());
     }
 
     @Test
@@ -112,8 +112,8 @@ public class PhysicsTest {
 
         Physics.forceDisplay(magnet, new PVector(0,0,0), particle[0]);
 
-        assertEqualsPVector(magnet.getSpeed(), new PVector(1,2,3));
-        assertEqualsPVector(magnet.getVelocity(), new PVector(4,5,6));
+        assertEqualsPVector(new PVector(1,2,3), magnet.getSpeed());
+        assertEqualsPVector(new PVector(4,5,6), magnet.getVelocity());
     }
 
     @Test
@@ -125,7 +125,7 @@ public class PhysicsTest {
 
         PVector force = new PVector(F,0,0);
 
-        assertEqualsPVector(Physics.forceGravity(part1,part2), force);
+        assertEqualsPVector(force, Physics.forceGravity(part1,part2));
     }
 
     @Test
@@ -137,7 +137,7 @@ public class PhysicsTest {
 
         PVector force = new PVector(-F,0,0);
 
-        assertEqualsPVector(Physics.forceGravity(part1,part2), force);
+        assertEqualsPVector(force, Physics.forceGravity(part1,part2));
     }
 
     @Test
@@ -147,6 +147,6 @@ public class PhysicsTest {
 
         PVector force = new PVector(0,0,0);
 
-        assertEqualsPVector(Physics.forceGravity(part1,part2), force);
+        assertEqualsPVector(force, Physics.forceGravity(part1,part2));
     }
 }

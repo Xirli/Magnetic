@@ -9,29 +9,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConstCoordMagnetTest {
 
-    public void assertEqualsPVector(PVector vector1, PVector vector2){
+    public void assertEqualsPVector(PVector expected, PVector actual){
         try {
-            assertEquals(vector1.x, vector2.x, accuracy);
-            assertEquals(vector1.y, vector2.y, accuracy);
-            assertEquals(vector1.z, vector2.z, accuracy);
+            assertEquals(expected.x, actual.x, accuracy);
+            assertEquals(expected.y, actual.y, accuracy);
+            assertEquals(expected.z, actual.z, accuracy);
         }catch(AssertionFailedError e){
-            System.out.println("Expected:" + vector1);
-            System.out.println("Actual  :" + vector2);
+            System.out.println("Expected:" + expected);
+            System.out.println("Actual  :" + actual);
             System.out.println();
             throw e;
         }
     }
 
-    public void assertEqualsParticle(Particle part1, Particle part2){
-        assertEqualsPVector(part1.absoluteCoord, part2.absoluteCoord);
-        assertEquals(part1.charge, part2.charge);
-        assertEquals(part1.mass, part2.mass);
+    public void assertEqualsParticle(Particle expected, Particle actual){
+        assertEqualsPVector(expected.absoluteCoord, actual.absoluteCoord);
+        assertEquals(expected.charge, actual.charge);
+        assertEquals(expected.mass, actual.mass);
     }
 
-    public void assertEqualsParticle(Particle[] part1, Particle[] part2){
-        assertEquals(part1.length, part2.length);
-        for (int i = 0; i < part1.length; i++) {
-            assertEqualsParticle(part1[i], part2[i]);
+    public void assertEqualsParticle(Particle[] expected, Particle[] actual){
+        assertEquals(expected.length, actual.length);
+        for (int i = 0; i < expected.length; i++) {
+            assertEqualsParticle(expected[i], actual[i]);
         }
     }
 
@@ -52,7 +52,7 @@ public class ConstCoordMagnetTest {
                 new Particle(new PVector(-1,-1,-1),1,1)
         };
 
-        assertEqualsParticle(magnet.getParticle(), particleResult);
+        assertEqualsParticle(particleResult, magnet.getParticle());
     }
 
     @Test
@@ -73,6 +73,6 @@ public class ConstCoordMagnetTest {
                 new Particle(new PVector(-1,+1,-1),1,1)
         };
 
-        assertEqualsParticle(magnet.getParticle(), particleResult);
+        assertEqualsParticle(particleResult, magnet.getParticle());
     }
 }
