@@ -62,13 +62,13 @@ public class MagnetGeneratorTest {
     public void newMultipole() {
         Particle[] dipole = MagnetGenerator.multipole(4,1, 2, 3);
 
-        Particle[] particleResult = {
+        Particle[] particleExpected = {
                 new Particle(new PVector( 1, 0, 0), +2 ,3),
                 new Particle(new PVector( 0, 1, 0), -2 ,3),
                 new Particle(new PVector(-1, 0, 0), +2 ,3),
                 new Particle(new PVector( 0,-1, 0), -2 ,3)
         };
 
-        assertEqualsParticle(particleResult, dipole);
+        assertEqualsParticle(particleExpected, dipole);
     }
 }

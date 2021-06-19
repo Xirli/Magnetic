@@ -122,10 +122,9 @@ public class PhysicsTest {
         Particle part2 = new Particle(new PVector(minRadiusOfParticle+1,0,0),-1,1);
 
         float F = kulon / ((minRadiusOfParticle+1)*(minRadiusOfParticle+1));
+        PVector forceExpected = new PVector(F,0,0);
 
-        PVector force = new PVector(F,0,0);
-
-        assertEqualsPVector(force, Physics.forceGravity(part1,part2));
+        assertEqualsPVector(forceExpected, Physics.forceGravity(part1,part2));
     }
 
     @Test
@@ -134,10 +133,9 @@ public class PhysicsTest {
         Particle part2 = new Particle(new PVector(minRadiusOfParticle*0.9f,0,0),+1,1);
 
         float F = kulon / (minRadiusOfParticle*minRadiusOfParticle);
+        PVector forceExpected = new PVector(-F,0,0);
 
-        PVector force = new PVector(-F,0,0);
-
-        assertEqualsPVector(force, Physics.forceGravity(part1,part2));
+        assertEqualsPVector(forceExpected, Physics.forceGravity(part1,part2));
     }
 
     @Test
@@ -145,8 +143,8 @@ public class PhysicsTest {
         Particle part1 = new Particle(new PVector(0,0,0),+1,1);
         Particle part2 = new Particle(new PVector(0,0,0),-1,1);
 
-        PVector force = new PVector(0,0,0);
+        PVector forceExpected = new PVector(0,0,0);
 
-        assertEqualsPVector(force, Physics.forceGravity(part1,part2));
+        assertEqualsPVector(forceExpected, Physics.forceGravity(part1,part2));
     }
 }

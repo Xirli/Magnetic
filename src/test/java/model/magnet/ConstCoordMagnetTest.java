@@ -47,12 +47,12 @@ public class ConstCoordMagnetTest {
 
         magnet.run();
 
-        Particle[] particleResult = new Particle[]{
+        Particle[] particleExpected = new Particle[]{
                 new Particle(new PVector(+1,+1,+1),1,1),
                 new Particle(new PVector(-1,-1,-1),1,1)
         };
 
-        assertEqualsParticle(particleResult, magnet.getParticle());
+        assertEqualsParticle(particleExpected, magnet.getParticle());
     }
 
     @Test
@@ -68,11 +68,11 @@ public class ConstCoordMagnetTest {
 
         magnet.run();
 
-        Particle[] particleResult = new Particle[]{
+        Particle[] particleExpected = new Particle[]{
                 new Particle(new PVector(+1,-1,+1),1,1),
                 new Particle(new PVector(-1,+1,-1),1,1)
         };
 
-        assertEqualsParticle(particleResult, magnet.getParticle());
+        assertEqualsParticle(particleExpected, magnet.getParticle());
     }
 }

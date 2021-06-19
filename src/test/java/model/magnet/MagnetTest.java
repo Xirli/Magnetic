@@ -44,12 +44,12 @@ public class MagnetTest {
 
         Magnet magnet = new Magnet(particle, (s, m) -> { });
 
-        Particle[] particleResult = new Particle[]{
+        Particle[] particleExpected = new Particle[]{
             new Particle(new PVector(4,4,4),1,3),
             new Particle(new PVector(0,0,0),1,1)
         };
 
-        assertEqualsParticle(particleResult, magnet.getParticle());
+        assertEqualsParticle(particleExpected, magnet.getParticle());
         assertEqualsPVector(new PVector(3,3,3), magnet.getCoord());
         assertEquals(36, magnet.getMomentOfInertia());
     }
@@ -64,13 +64,13 @@ public class MagnetTest {
 
         magnet.setCoord(5,5,5);
 
-        Particle[] particleResult = new Particle[]{
+        Particle[] particleExpected = new Particle[]{
                 new Particle(new PVector(4,4,4),1,1),
                 new Particle(new PVector(6,6,6),1,1)
         };
 
         assertEqualsPVector(new PVector(5, 5, 5), magnet.getCoord());
-        assertEqualsParticle(particleResult, magnet.getParticle());
+        assertEqualsParticle(particleExpected, magnet.getParticle());
     }
 
     @Test
