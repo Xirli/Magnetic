@@ -47,7 +47,7 @@ public class Physics {
     public static void forceDisplay(Magnet mag, PVector force, Particle part){
         mag.setSpeed( PVector.add(mag.getSpeed(), PVector.div(force, mag.getMass())));
 
-        if(mag.getMomentOfInertia() == 0) return;
+        if(mag.getMomentOfInertia() == 0f) return;
 
         PVector Moment = force.cross(PVector.add(part.absoluteCoord, PVector.mult(mag.getCoord(),-1)));
         mag.setVelocity( PVector.add(mag.getVelocity(), Moment.div(-mag.getMomentOfInertia())) );
