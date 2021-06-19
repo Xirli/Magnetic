@@ -1,6 +1,6 @@
 package controller;
 
-public interface Param {
+public interface ParamController {
     long FPS = 60;
     long msPerUpdateModel = 100;
 }

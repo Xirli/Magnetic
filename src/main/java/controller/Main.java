@@ -8,7 +8,7 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-import static controller.Param.msPerUpdateModel;
+import static controller.ParamController.msPerUpdateModel;
 import static java.lang.Thread.sleep;
 
 public class Main{

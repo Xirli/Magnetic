@@ -6,9 +6,9 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-import static controller.Param.*;
-import static view.Param.frameHeight;
-import static view.Param.frameWidth;
+import static controller.ParamController.*;
+import static view.ParamView.frameHeight;
+import static view.ParamView.frameWidth;
 
 public class MyApplet extends PApplet{
 

@@ -9,8 +9,8 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static model.Param.kulon;
-import static model.Param.minRadiusOfParticle;
+import static model.ParamModel.kulon;
+import static model.ParamModel.minRadiusOfParticle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 

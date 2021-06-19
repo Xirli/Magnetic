@@ -2,7 +2,7 @@ package view;
 
 import model.magnet.Particle;
 
-import static view.Param.drawRadiusOfParticle;
+import static view.ParamView.drawRadiusOfParticle;
 
 public class GraphicGenerator {
 

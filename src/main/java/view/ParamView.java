@@ -1,6 +1,6 @@
 package view;
 
-public interface Param {
+public interface ParamView {
     int frameWidth = 800;
     int frameHeight = 600;
 

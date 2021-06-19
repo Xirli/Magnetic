@@ -6,7 +6,7 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static model.Param.*;
+import static model.ParamModel.*;
 
 public class MagnetGenerator {
 

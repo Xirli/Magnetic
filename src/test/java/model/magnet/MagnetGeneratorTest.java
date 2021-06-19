@@ -4,15 +4,16 @@ import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import processing.core.PVector;
 
+import static model.ParamModelTest.accuracy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MagnetGeneratorTest {
 
     public void assertEqualsPVector(PVector vector1, PVector vector2){
         try {
-            assertEquals(vector1.x, vector2.x, 1E-5);
-            assertEquals(vector1.y, vector2.y, 1E-5);
-            assertEquals(vector1.z, vector2.z, 1E-5);
+            assertEquals(vector1.x, vector2.x, accuracy);
+            assertEquals(vector1.y, vector2.y, accuracy);
+            assertEquals(vector1.z, vector2.z, accuracy);
         }catch(AssertionFailedError e){
             System.out.println("Expected:" + vector1);
             System.out.println("Actual  :" + vector2);

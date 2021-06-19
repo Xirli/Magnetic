@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-import static view.Param.analysisSize;
+import static view.ParamView.analysisSize;
 
 public class Analyzer {
 
