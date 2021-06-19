@@ -172,6 +172,24 @@ public class MagnetTest {
     }
 
     @Test
+    public void rotateZero() {
+        Particle[] particle = new Particle[]{
+                new Particle(new PVector(+1,+1,+1),1,1),
+                new Particle(new PVector(-1,-1,-1),1,1)
+        };
+        Magnet magnet = new Magnet(particle, (s, m) -> { });
+
+        magnet.rotate(0, 0,0);
+
+        Particle[] particleResult = new Particle[]{
+                new Particle(new PVector(+1,+1,+1),1,1),
+                new Particle(new PVector(-1,-1,-1),1,1)
+        };
+
+        assertEqualsParticle(magnet.getParticle(), particleResult);
+    }
+
+    @Test
     public void setGetVelocity() {
         Magnet magnet = new Magnet(new Particle[]{}, (s, m) -> { });
 

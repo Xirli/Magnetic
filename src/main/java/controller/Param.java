@@ -1,6 +1,6 @@
 package controller;
 
 public interface Param {
-    long msPerUpdateFrame = 20;
-    long msPerUpdateModel = 20;
+    long FPS = 60;
+    long msPerUpdateModel = 100;
 }

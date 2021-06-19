@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import static model.Param.kulon;
 import static model.Param.minRadiusOfParticle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 public class PhysicsTest {
 
@@ -74,6 +75,8 @@ public class PhysicsTest {
         MagnetStub mag2 = randomMagnetStub(count2);
 
         Physics.gravity(mag1, mag2);
+
+        System.out.println(mag2.velocityCount);
 
         assertEquals(mag1.velocityCount, count1*count2);
         assertEquals(mag1.speedCount, count1*count2);

@@ -22,7 +22,7 @@ public class MyApplet extends PApplet{
         size(frameWidth, frameHeight);
     }
     public void setup() {
-        frameRate(msPerUpdateFrame);
+        frameRate(FPS);
     }
 
     public void draw(){
