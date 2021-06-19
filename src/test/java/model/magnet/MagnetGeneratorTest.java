@@ -22,7 +22,6 @@ public class MagnetGeneratorTest {
     }
 
     public void assertEqualsParticle(Particle part1, Particle part2){
-        assertEqualsPVector(part1.coord, part2.coord);
         assertEqualsPVector(part1.absoluteCoord, part2.absoluteCoord);
         assertEquals(part1.charge, part2.charge);
         assertEquals(part1.mass, part2.mass);

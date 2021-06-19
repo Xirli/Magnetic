@@ -68,16 +68,16 @@ public class PhysicsTest {
 
     @Test
     public void gravityOneParticle(){
-        int count1 = 1;
-        int count2 = 5;
+        int count1 = 5;
+        int count2 = 1;
         MagnetStub mag1 = randomMagnetStub(count1);
         MagnetStub mag2 = randomMagnetStub(count2);
 
         Physics.gravity(mag1, mag2);
 
-        assertEquals(mag1.velocityCount, 0);
+        assertEquals(mag1.velocityCount, count1*count2);
         assertEquals(mag1.speedCount, count1*count2);
-        assertEquals(mag2.velocityCount, count1*count2);
+        assertEquals(mag2.velocityCount, 0);
         assertEquals(mag1.speedCount,count1*count2);
     }
 

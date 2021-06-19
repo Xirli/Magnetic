@@ -1,7 +1,6 @@
 package model.magnet;
 
 import view.GraphicObject;
-import processing.core.PVector;
 
 public class ConstCoordMagnet extends Magnet{
     public ConstCoordMagnet(Particle[] particle, GraphicObject graphic) {
@@ -10,7 +9,6 @@ public class ConstCoordMagnet extends Magnet{
 
     public void run() {
         //coord is const
-        //setAngle(PVector.add(getAngle(), getVelocity()));
         rotate(getVelocity());
     }
 }

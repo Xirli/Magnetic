@@ -3,14 +3,12 @@ package model.magnet;
 import processing.core.PVector;
 
 public class Particle {
-    public final PVector coord;
     public final PVector absoluteCoord;
 
     public final float charge;
     public final float mass;
 
     public Particle(PVector coord, float charge, float mass){
-        this.coord = coord;
         absoluteCoord = new PVector(coord.x, coord.y, coord.z);
         this.charge = charge;
         this.mass = mass;
@@ -26,7 +24,6 @@ public class Particle {
     @Override
     public String toString() {
         return "Model.Particle{" +
-                "coord=" + coord +
                 ", absoluteCoord=" + absoluteCoord +
                 ", charge=" + charge +
                 ", mass=" + mass +

@@ -23,7 +23,6 @@ public class MouseMagnetTest {
     }
 
     public void assertEqualsParticle(Particle part1, Particle part2){
-        assertEqualsPVector(part1.coord, part2.coord);
         assertEqualsPVector(part1.absoluteCoord, part2.absoluteCoord);
         assertEquals(part1.charge, part2.charge);
         assertEquals(part1.mass, part2.mass);
@@ -53,11 +52,9 @@ public class MouseMagnetTest {
         magnet.run();
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(+2,+2,+1),1,1),
+                new Particle(new PVector(0, 0,-1),1,1)
         };
-        particleResult[0].absoluteCoord.set(+2,+2,+1);
-        particleResult[1].absoluteCoord.set( 0, 0,-1);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -80,11 +77,9 @@ public class MouseMagnetTest {
         magnet.run();
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(2,0, 1),1,1),
+                new Particle(new PVector(0,2,-1),1,1)
         };
-        particleResult[0].absoluteCoord.set(2,0, 1);
-        particleResult[1].absoluteCoord.set(0,2,-1);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }

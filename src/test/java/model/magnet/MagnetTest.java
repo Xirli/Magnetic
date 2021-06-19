@@ -22,7 +22,6 @@ public class MagnetTest {
     }
 
     public void assertEqualsParticle(Particle part1, Particle part2){
-        assertEqualsPVector(part1.coord, part2.coord);
         assertEqualsPVector(part1.absoluteCoord, part2.absoluteCoord);
         assertEquals(part1.charge, part2.charge);
         assertEquals(part1.mass, part2.mass);
@@ -45,13 +44,9 @@ public class MagnetTest {
         Magnet magnet = new Magnet(particle, (s, m) -> { });
 
         Particle[] particleResult = new Particle[]{
-            new Particle(new PVector(0,0,0),1,3),
+            new Particle(new PVector(4,4,4),1,3),
             new Particle(new PVector(0,0,0),1,1)
         };
-        particleResult[0].coord.set(1,1,1);
-        particleResult[1].coord.set(-3,-3,-3);
-        particleResult[0].absoluteCoord.set(4,4,4);
-        particleResult[1].absoluteCoord.set(0,0,0);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
         assertEqualsPVector(magnet.getCoord(), new PVector(3,3,3));
@@ -69,13 +64,9 @@ public class MagnetTest {
         magnet.setCoord(5,5,5);
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(-1,-1,-1),1,1),
-                new Particle(new PVector(+1,+1,+1),1,1)
+                new Particle(new PVector(4,4,4),1,1),
+                new Particle(new PVector(6,6,6),1,1)
         };
-        particleResult[0].coord.set(-1,-1,-1);
-        particleResult[1].coord.set(+1,+1,+1);
-        particleResult[0].absoluteCoord.set(4,4,4);
-        particleResult[1].absoluteCoord.set(6,6,6);
 
         assertEqualsPVector(magnet.getCoord(), new PVector(5, 5, 5));
         assertEqualsParticle(magnet.getParticle(), particleResult);
@@ -101,11 +92,9 @@ public class MagnetTest {
         magnet.rotate((float) Math.PI/2, 0,0);
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(+1,-1,+1),1,1),
+                new Particle(new PVector(-1,+1,-1),1,1)
         };
-        particleResult[0].absoluteCoord.set(+1,-1,+1);
-        particleResult[1].absoluteCoord.set(-1,+1,-1);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -121,11 +110,9 @@ public class MagnetTest {
         magnet.rotate(0,(float) Math.PI/2,0);
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(+1,+1,-1),1,1),
+                new Particle(new PVector(-1,-1,+1),1,1)
         };
-        particleResult[0].absoluteCoord.set(+1,+1,-1);
-        particleResult[1].absoluteCoord.set(-1,-1,+1);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -141,11 +128,9 @@ public class MagnetTest {
         magnet.rotate(0,0,(float) Math.PI/2);
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(-1,+1,+1),1,1),
+                new Particle(new PVector(+1,-1,-1),1,1)
         };
-        particleResult[0].absoluteCoord.set(-1,+1,+1);
-        particleResult[1].absoluteCoord.set(+1,-1,-1);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -161,11 +146,9 @@ public class MagnetTest {
         magnet.rotate((float) (-Math.PI/2/Math.sqrt(2)),(float) (Math.PI/2/Math.sqrt(2)),0);
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,0),1,1),
-                new Particle(new PVector(-1,-1,0),1,1)
+                new Particle(new PVector(0,0,(float) (-1.0 * Math.sqrt(2))),1,1),
+                new Particle(new PVector(0,0,(float) (+1.0 * Math.sqrt(2))),1,1)
         };
-        particleResult[0].absoluteCoord.set(0,0,(float) (-1.0 * Math.sqrt(2)));
-        particleResult[1].absoluteCoord.set(0,0,(float) (+1.0 * Math.sqrt(2)));
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -181,11 +164,9 @@ public class MagnetTest {
         magnet.rotate((float) (Math.PI/Math.sqrt(3)),(float) (Math.PI/Math.sqrt(3)),(float) (Math.PI/Math.sqrt(3)));
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(-1,+1,0),1,1),
-                new Particle(new PVector(+1,-1,0),1,1)
+                new Particle(new PVector(+1,-1,0),1,1),
+                new Particle(new PVector(-1,+1,0),1,1)
         };
-        particleResult[0].absoluteCoord.set(+1,-1,0);
-        particleResult[1].absoluteCoord.set(-1,+1,0);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -213,11 +194,9 @@ public class MagnetTest {
         magnet.run();
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(2,0,2),1,1),
+                new Particle(new PVector(0,2,0),1,1)
         };
-        particleResult[0].absoluteCoord.set(2,0,2);
-        particleResult[1].absoluteCoord.set(0,2,0);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -239,11 +218,9 @@ public class MagnetTest {
         magnet.run();
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(+1,-1,-1),1,1),
+                new Particle(new PVector(-1,+1,+1),1,1)
         };
-        particleResult[0].absoluteCoord.set(+1,-1,-1);
-        particleResult[1].absoluteCoord.set(-1,+1,+1);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
@@ -267,11 +244,9 @@ public class MagnetTest {
         magnet.run();
 
         Particle[] particleResult = new Particle[]{
-                new Particle(new PVector(+1,+1,+1),1,1),
-                new Particle(new PVector(-1,-1,-1),1,1)
+                new Particle(new PVector(4,2,2),1,1),
+                new Particle(new PVector(2,4,4),1,1)
         };
-        particleResult[0].absoluteCoord.set(4,2,2);
-        particleResult[1].absoluteCoord.set(2,4,4);
 
         assertEqualsParticle(magnet.getParticle(), particleResult);
     }
