@@ -1,38 +1,18 @@
 package controller;
 
-import model.magnet.Magnet;
-import model.magnet.MagnetGenerator;
-import model.service.Physics;
-import view.GraphicGenerator;
 import processing.core.PApplet;
-
-import java.util.ArrayList;
-
-import static controller.ParamController.msPerUpdateModel;
-import static java.lang.Thread.sleep;
 
 public class Main{
 
     public static void main(String[] args){
-        ArrayList<Magnet> magnets = new ArrayList<>();
-        MyApplet sketch = new MyApplet(magnets);
+        PhysicsController physicsController = new PhysicsController();
+        MyApplet sketch = new MyApplet();
 
-        magnets.addAll(MagnetGenerator.generateDipole( GraphicGenerator.blackWhiteCircle()));
-        magnets.add(MagnetGenerator.generateMouseMagnet(sketch, GraphicGenerator.testCharge()));
+        physicsController.setSketch(sketch);
+        sketch.setPhysicsController(physicsController);
 
         PApplet.runSketch(new String[]{"MySketch"}, sketch);
-        updateLoop(magnets);
+        physicsController.start(1);
     }
 
-    public static void updateLoop(ArrayList<Magnet> magnets) {
-        while (true)
-        {
-            long start = System.currentTimeMillis();
-            Physics.update(magnets);
-            try {
-                long timeSleep = start + msPerUpdateModel - System.currentTimeMillis();
-                if(timeSleep > 0) sleep(timeSleep);
-            } catch(InterruptedException ignored){}
-        }
-    }
 }

@@ -4,18 +4,18 @@ import model.magnet.Magnet;
 import view.Analyzer;
 import processing.core.PApplet;
 
-import java.util.ArrayList;
-
 import static controller.ParamController.*;
 import static view.ParamView.frameHeight;
 import static view.ParamView.frameWidth;
 
 public class MyApplet extends PApplet{
 
-    ArrayList<Magnet> magnets;
+    PhysicsController physicsController;
 
-    MyApplet(ArrayList<Magnet> magnets){
-        this.magnets = magnets;
+    MyApplet(){ }
+
+    public void setPhysicsController(PhysicsController physicsController) {
+        this.physicsController = physicsController;
     }
 
     public void settings(){
@@ -27,9 +27,18 @@ public class MyApplet extends PApplet{
 
     public void draw(){
         background(0);
-        Analyzer.potential(this, magnets);
-        for(Magnet mag : magnets) {
+        Analyzer.potential(this, physicsController.getMagnets());
+        for(Magnet mag : physicsController.getMagnets()) {
             mag.draw(this);
+        }
+    }
+
+    public void keyPressed(){
+        switch (key) {
+            case ' ' -> physicsController.changeRunPause();
+            case ESC -> physicsController.stop();
+            case '1' -> physicsController.start(1);
+            case '2' -> physicsController.start(2);
         }
     }
 
