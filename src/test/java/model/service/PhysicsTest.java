@@ -45,7 +45,21 @@ public class PhysicsTest {
         magnets.add(randomMagnetStub(4));
         magnets.add(randomMagnetStub(5));
 
-        Physics.update(magnets);
+        new Physics(magnets).update();
+
+        assertEquals(1, ((MagnetStub)magnets.get(0)).runCount);
+        assertEquals(3*(4+5), ((MagnetStub)magnets.get(0)).speedCount);
+        assertEquals(3*(4+5)+1, ((MagnetStub)magnets.get(0)).velocityCount);
+    }
+
+    @Test
+    public void multiUpdate(){
+        ArrayList<Magnet> magnets = new ArrayList<Magnet>();
+        magnets.add(randomMagnetStub(3));
+        magnets.add(randomMagnetStub(4));
+        magnets.add(randomMagnetStub(5));
+
+        new Physics(magnets).multiUpdate();
 
         assertEquals(1, ((MagnetStub)magnets.get(0)).runCount);
         assertEquals(3*(4+5), ((MagnetStub)magnets.get(0)).speedCount);

@@ -49,13 +49,13 @@ public class MagnetGenerator {
 
     public static ArrayList<Magnet> generateDipole(GraphicObject graphic){
 
-        int count = 10;
+        int count = 1000;
         int radius = 10;
 
         ArrayList<Magnet> magnets = new ArrayList<>();
         for(int i = 0; i < count; i++) {
             Magnet m = new Magnet(dipole(radius, 1, 1), graphic);
-            m.setCoord(PVector.random2D().mult(100).add(sceneX, sceneY, sceneZ));
+            m.setCoord(PVector.random3D().mult(100).add(sceneX, sceneY, sceneZ));
             m.setVelocity(0,0,0);
             magnets.add(m);
         }

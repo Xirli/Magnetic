@@ -12,13 +12,15 @@ import static java.lang.Thread.sleep;
 
 public class PhysicsController {
 
-    MyApplet sketch;
-    private ArrayList<Magnet> magnets;
+    private MyApplet sketch;
+    Physics physics;
+    private final ArrayList<Magnet> magnets;
     private boolean doing;
     private Thread thread;
 
     public PhysicsController(){
         magnets = new ArrayList<>();
+        physics = new Physics(magnets);
         Runnable task = this::updateLoop;
         thread = new Thread(task);
     }
@@ -31,7 +33,8 @@ public class PhysicsController {
         while (doing)
         {
             long start = System.currentTimeMillis();
-            Physics.update(magnets);
+            physics.multiUpdate();
+            //physics.update();
             try {
                 long timeSleep = start + msPerUpdateModel - System.currentTimeMillis();
                 if(timeSleep > 0) sleep(timeSleep);
@@ -41,9 +44,10 @@ public class PhysicsController {
 
     public void start(int type){
         stop();
+        magnets.clear();
         switch (type) {
-            case 1 -> magnets = new ArrayList<>(MagnetGenerator.generateDipole(GraphicGenerator.blackWhiteCircle()));
-            case 2 -> magnets = new ArrayList<>(MagnetGenerator.generateParaMagnetic(GraphicGenerator.blackWhiteCircle()));
+            case 1 -> magnets.addAll(new ArrayList<>(MagnetGenerator.generateDipole(GraphicGenerator.blackWhiteCircle())));
+            case 2 -> magnets.addAll(new ArrayList<>(MagnetGenerator.generateParaMagnetic(GraphicGenerator.blackWhiteCircle())));
         }
         run();
     }

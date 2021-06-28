@@ -27,7 +27,7 @@ public class MyApplet extends PApplet{
 
     public void draw(){
         background(0);
-        Analyzer.potential(this, physicsController.getMagnets());
+        //Analyzer.potential(this, physicsController.getMagnets());
         for(Magnet mag : physicsController.getMagnets()) {
             mag.draw(this);
         }

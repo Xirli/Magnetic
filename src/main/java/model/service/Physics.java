@@ -6,11 +6,23 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
+import static controller.ParamController.countThread;
 import static model.ParamModel.*;
 
 public class Physics {
 
-    public static void update(ArrayList<Magnet> magnets){
+    Thread[] threads;
+    Runnable task = this::getTask;
+
+    private final ArrayList<Magnet> magnets;
+    private int incrementA, incrementB;
+
+    public Physics(ArrayList<Magnet> magnets){
+        threads = new Thread[countThread];
+        this.magnets = magnets;
+    }
+
+    public void update(){
         for(Magnet mag : magnets) {
             mag.run();
             mag.setVelocity(PVector.mult(mag.getVelocity(), rotationSlowdown));
@@ -21,6 +33,44 @@ public class Physics {
                 if(mag1 == mag2)break;
                 gravity(mag1, mag2);
             }
+        }
+    }
+
+    public void multiUpdate() {
+        for(Magnet mag : magnets) {
+            mag.run();
+            mag.setVelocity(PVector.mult(mag.getVelocity(), rotationSlowdown));
+        }
+
+        incrementA = 0;
+        incrementB = 0;
+
+        for (int i = 0; i < countThread; i++) {
+            threads[i] = new Thread(task);
+            threads[i].start();
+        }
+        try {
+            for (int i = 0; i < countThread; i++) {
+                threads[i].join();
+            }
+        } catch(InterruptedException ignored){}
+    }
+
+    public void getTask(){
+        while(true){
+            int valA, valB;
+            synchronized (this){
+                incrementB++;
+                if(incrementB == magnets.size()){
+                    incrementA++;
+                    incrementB = incrementA+1;
+                }
+                if(incrementA == magnets.size()-1) return;
+                valA = incrementA;
+                valB = incrementB;
+            }
+            //System.out.println("A = " + valA + "; B = " + valB + ";");
+            gravity(magnets.get(valA), magnets.get(valB));
         }
     }
 
@@ -45,12 +95,16 @@ public class Physics {
     }
 
     public static void forceDisplay(Magnet mag, PVector force, Particle part){
-        mag.setSpeed( PVector.add(mag.getSpeed(), PVector.div(force, mag.getMass())));
-
+        PVector acceleration = PVector.div(force, mag.getMass());
+        synchronized (mag) {
+            mag.setSpeed(PVector.add(mag.getSpeed(), acceleration));
+        }
         if(mag.getMomentOfInertia() < accuracy) return;
 
-        PVector Moment = force.cross(PVector.add(part.absoluteCoord, PVector.mult(mag.getCoord(),-1)));
-        mag.setVelocity( PVector.add(mag.getVelocity(), Moment.div(-mag.getMomentOfInertia())) );
+        PVector moment = force.cross(PVector.add(part.absoluteCoord, PVector.mult(mag.getCoord(),-1)));
+        synchronized (mag) {
+            mag.setVelocity( PVector.add(mag.getVelocity(), moment.div(-mag.getMomentOfInertia())) );
+        }
     }
 
 }
